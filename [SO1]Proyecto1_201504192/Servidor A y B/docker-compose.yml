@@ -1,0 +1,16 @@
+version: "3"
+services: 
+    mymongo_1:
+        image: "mongo"
+        ports: 
+          - 5000:27017
+    
+    myreader:
+        build: .
+        depends_on: 
+            - mymongo_1
+        ports:
+            - "80:80"
+        volumes: 
+            - /proc/ram-module:/elements/procs/ram.txt
+            - /proc/stat:/elements/procs/stat.txt
